@@ -21,6 +21,54 @@ document.addEventListener('DOMContentLoaded', () => {
             element.style.animation = `fadeInUp 0.8s ease-out forwards ${index * 0.3}s`;
         });
     }
+    
+    document.getElementById("adminButton").addEventListener("click", function(event){
+        event.preventDefault();
+        document.getElementById("adminLoginModal").classList.add("show");
+    });
+
+    document.getElementById("closeBtn").addEventListener("click", function(event){
+        event.preventDefault();
+        document.getElementById("adminLoginModal").classList.remove("show");
+    });
+    document.getElementById("cancelBtn").addEventListener("click", function(event){
+        event.preventDefault();
+        document.getElementById("adminLoginModal").classList.remove("show");
+    });
+
+    document.getElementById("adminLoginModal").addEventListener("submit", function(event){
+        event.preventDefault();
+    
+        const formData = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        };
+    
+        fetch("api/admin_login_api.php", {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {"Content-Type": "application/json"}
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            if(data.status === "success"){
+                // Hide modal and possibly redirect or refresh
+                document.getElementById("adminLoginModal").classList.remove("show");
+                window.location.reload(); // or redirect
+            } else {
+                alert(data.message || "Login failed");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred during login");
+        });
+    });
 });
 
 function initCursor() {
@@ -245,3 +293,4 @@ function initCounters() {
         });
     }
 }
+

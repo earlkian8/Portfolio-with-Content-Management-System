@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +9,30 @@
     <link rel="stylesheet" href="style/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </head>
-<body>
-    
-    <div class="cursor"></div>
+    <form method="post" action="index.php" id="adminLoginModal" class="modal-overlay">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h2>Admin Login</h2>
+            <span class="close-btn" id="closeBtn">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="adminLoginForm">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="off">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                <button type="submit" class="login-btn" name="login" id="login">Login</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </form>
     <header>
         <div class="logo">
             <span class="gradient-text" id="headText">Portfolio</span>
@@ -102,9 +125,9 @@
                             </div>
                             <div class="skill-icon-item">
                                 <div class="skill-logo">
-                                    <i class="fab fa-react"></i>
+                                    <i class="fa-brands fa-java"></i>
                                 </div>
-                                <span>React</span>
+                                <span>Java</span>
                             </div>
                             <div class="skill-icon-item">
                                 <div class="skill-logo">
@@ -229,17 +252,17 @@
                 <div class="services-grid">
                     <div class="service-card">
                         <h3>Web Development</h3>
-                        <p>I create responsive, fast-loading websites that provide excellent user experience across all devices. Using modern frameworks and best practices, I develop custom web solutions tailored to your specific needs.</p>
+                        <p>I create responsive and well-structured websites that perform smoothly across all devices. By combining modern technologies with tailored design, I deliver web solutions that help you stand out and support your goals.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Software Development</h3>
+                        <p>I develop user-centered software with clean interfaces and reliable functionality. Every project is designed to be efficient, easy to navigate, and aligned with your specific needs.</p>
                     </div>
                     
                     <div class="service-card">
                         <h3>UI/UX Design</h3>
-                        <p>I design intuitive and attractive user interfaces that enhance user engagement and satisfaction. My approach focuses on understanding your users' needs to create meaningful digital experiences.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <h3>Mobile App Development</h3>
-                        <p>I build cross-platform mobile applications that work seamlessly on both iOS and Android. Using React Native, I deliver native-like performance while maintaining a single codebase.</p>
+                        <p>I design thoughtful and intuitive user experiences that enhance how people interact with your product. With a strong focus on both usability and visual appeal, I help turn ideas into meaningful digital experiences.</p>
                     </div>
                 </div>
             </div>
@@ -308,7 +331,7 @@
         </section>
         
     </main>
-    <!--<button class="admin-button-style secondary-btn" id="adminButton">Admin Login</button>-->
+    <button class="admin-button-style secondary-btn" id="adminButton">Admin Login</button>
     <script src="js/index.js"></script>
 </body>
 </html>
