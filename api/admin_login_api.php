@@ -35,12 +35,7 @@ if ($method == 'POST') {
         if ($admin->login($username, $password)) {
             $_SESSION["username"] = $username;
             $_SESSION["loggedin"] = true;
-            if ($_SESSION["loggedin"] == true) {
-                header("Location: admin/home.php");
-                exit;
-            } else {
-                $error = "Invalid email or password.";
-            }
+            
             echo json_encode(["status" => "success"]);
         } else {
             echo json_encode(["status" => "error", "message" => "Invalid credentials"]);

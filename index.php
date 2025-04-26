@@ -1,4 +1,11 @@
+<?php
+session_start();
 
+if ($_SESSION["loggedin"] == true) {
+    header("Location: admin/home.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">

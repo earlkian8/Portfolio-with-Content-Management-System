@@ -41,7 +41,7 @@ if (!isset($_SESSION['loggedin'])) {
             </div>
 
             <div class="form-section">
-                <form>
+                <form id="homeForm">
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" placeholder="Enter your name" autocomplete="off">
@@ -83,5 +83,6 @@ if (!isset($_SESSION['loggedin'])) {
             document.querySelector('.file-name').textContent = fileName;
         });
     </script>
+    <script src="../js/home.js"></script>
 </body>
 </html>
