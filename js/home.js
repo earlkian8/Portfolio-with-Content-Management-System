@@ -9,6 +9,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("profile-image").addEventListener("change", function(e) {
         const fileName = e.target.files[0] ? e.target.files[0].name : "No file chosen";
         document.querySelector(".file-name").textContent = fileName;
+
+        if (e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById("profile-preview");
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
     });
 });
 
@@ -26,6 +36,7 @@ function getHome() {
             document.getElementById("tagline").value = home.tagline || "";
             if (home.profile_image) {
                 document.getElementById("profile-preview").src = "../uploads/" + home.profile_image;
+                document.getElementById("profile-preview").style.display = "block";
             }
         }
     })
@@ -33,64 +44,28 @@ function getHome() {
 }
 
 function updateHome() {
-    const formData = {
-        name: document.getElementById("name").value,
-        designation: document.getElementById("designation").value,
-        tagline: document.getElementById("tagline").value
-    };
-
-    const imageInput = document.getElementById("profile-image");
-    const file = imageInput.files[0];
-    
-    if (file) {
-        uploadImage(file)
-            .then(imagePath => {
-                formData.profile_image = imagePath;
-                sendUpdateRequest(formData);
-            })
-            .catch(error => {
-                console.error("Error uploading image:", error);
-                alert("Error uploading image");
-            });
-    } else {
-        sendUpdateRequest(formData);
-    }
-}
-
-function uploadImage(file) {
     const formData = new FormData();
-    formData.append("profile_image", file);
+    formData.append("name", document.getElementById("name").value);
+    formData.append("designation", document.getElementById("designation").value);
+    formData.append("tagline", document.getElementById("tagline").value);
+    
+    const imageInput = document.getElementById("profile-image");
+    if (imageInput.files[0]) {
+        formData.append("profile_image", imageInput.files[0]);
+    }
 
-    return fetch("../api/upload_image.php", {
+    fetch("../api/admin_home_api.php", {
         method: "POST",
         body: formData
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === "success") {
-            return data.fileName;
-        } else {
-            throw new Error(data.message || "Image upload failed");
-        }
-    });
-}
-
-function sendUpdateRequest(data) {
-    fetch("../api/admin_home_api.php", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === "success") {
             alert("Home section updated successfully!");
             if (data.profile_image) {
-                document.getElementById("profile-preview").src = "../uploads/" + data.profile_image;
+                document.getElementById("profile-preview").src = "../Uploads/" + data.profile_image;
+                document.getElementById("profile-preview").style.display = "block";
             }
-            // Clear file input after successful upload
             document.getElementById("profile-image").value = "";
             document.querySelector(".file-name").textContent = "No file chosen";
         } else {

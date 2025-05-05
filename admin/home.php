@@ -41,7 +41,7 @@ if (!isset($_SESSION['loggedin'])) {
             </div>
 
             <div class="form-section">
-                <form id="homeForm">
+                <form id="homeForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" placeholder="Enter your name" autocomplete="off">
@@ -60,12 +60,13 @@ if (!isset($_SESSION['loggedin'])) {
                     <div class="form-group">
                         <label for="profile-image">Profile Image</label>
                         <div class="file-upload">
-                            <input type="file" id="profile-image" name="profile-image" style="display: none;">
+                            <input type="file" id="profile-image" name="profile_image" accept="image/*" style="display: none;">
                             <div class="file-label" onclick="document.getElementById('profile-image').click()">
                                 <i class="fas fa-upload"></i> Choose Image
                             </div>
                             <span class="file-name">No file chosen</span>
                         </div>
+                        <img id="profile-preview" src="" alt="Profile Preview" style="max-width: 200px; display: none;">
                     </div>
 
                     <div class="form-actions">

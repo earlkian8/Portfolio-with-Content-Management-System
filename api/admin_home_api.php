@@ -1,12 +1,12 @@
 <?php
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, PUT");
+header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
 session_start();
 
-include "../config/database.php";
+include "database.php";
 include "../class/Home.php";
 
 $database = new Database();
@@ -23,31 +23,52 @@ try {
             echo json_encode(["status" => "success", "homeData" => $homeData]);
             break;
             
-        case 'PUT':
+        case 'POST':
             if (!isset($_SESSION['loggedin'])) {
                 http_response_code(401);
                 echo json_encode(["status" => "error", "message" => "Unauthorized"]);
                 break;
             }
-            
-            $putData = file_get_contents("php://input");
-            $data = json_decode($putData, true);
-            
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception("Invalid JSON data");
+
+            $name = $_POST['name'] ?? '';
+            $designation = $_POST['designation'] ?? '';
+            $tagline = $_POST['tagline'] ?? '';
+            $profile_image = null;
+
+            if (isset($_FILES['profile_image'])) {
+                $uploadDir = "../Uploads/";
+                if (!file_exists($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+
+                $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                $maxSize = 5 * 1024 * 1024; // 5MB
+                
+                $fileExt = strtolower(pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION));
+                if (!in_array($fileExt, $allowedTypes)) {
+                    throw new Exception("Invalid file type");
+                }
+                
+                if ($_FILES['profile_image']['size'] > $maxSize) {
+                    throw new Exception("File size exceeds limit");
+                }
+
+                $fileName = uniqid() . '.' . $fileExt;
+                $targetPath = $uploadDir . $fileName;
+
+                if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetPath)) {
+                    $profile_image = $fileName;
+                } else {
+                    throw new Exception("File upload failed");
+                }
             }
-            
-            $result = $home->updateHome(
-                $data['name'] ?? '',
-                $data['designation'] ?? '',
-                $data['tagline'] ?? '',
-                $data['profile_image'] ?? null
-            );
+
+            $result = $home->updateHome($name, $designation, $tagline, $profile_image);
             
             if ($result) {
                 $response = ["status" => "success"];
-                if (isset($data['profile_image'])) {
-                    $response["profile_image"] = $data['profile_image'];
+                if ($profile_image) {
+                    $response["profile_image"] = $profile_image;
                 }
                 echo json_encode($response);
             } else {
@@ -64,4 +85,6 @@ try {
     http_response_code(500);
     echo json_encode(["status" => "error", "message" => $e->getMessage()]);
 }
+
+$conn = null;
 ?>

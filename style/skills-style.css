@@ -336,7 +336,9 @@ nav ul li.active a {
 
 /* Modal */
 .modal {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -344,7 +346,16 @@ nav ul li.active a {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: .25s opacity ease-in-out, .25s visibility ease-in-out;
 }
+
+.modal.show{
+    opacity: 1;
+    visibility: visible;
+}
+
 
 .modal-content {
     background-color: var(--card-bg);

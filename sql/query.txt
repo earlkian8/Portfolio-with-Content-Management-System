@@ -1,0 +1,55 @@
+CREATE TABLE home (
+
+    home_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    tagline TEXT NOT NULL,
+    profile_image VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE skills (
+
+    skills_id INT AUTO_INCREMENT PRIMARY KEY,
+    description TEXT NOT NULL,
+    project_completed INT NOT NULL,
+    clients_served INT NOT NULL,
+    years_experience INT NOT NULL
+);
+
+CREATE TABLE programming (
+
+    programming_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    icon_class VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE education (
+    education_id INT AUTO_INCREMENT PRIMARY KEY,
+    degree VARCHAR(255) NOT NULL,
+    institution VARCHAR(255) NOT NULL,
+    start_year VARCHAR(255) NOT NULL,
+    end_year VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE TABLE experience (
+    experience_id INT AUTO_INCREMENT PRIMARY KEY,
+    position VARCHAR(255) NOT NULL,
+    company VARCHAR(255) NOT NULL,
+    start_year VARCHAR(255) NOT NULL,
+    end_year VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE TABLE skill_details (
+    skill_details_id INT AUTO_INCREMENT PRIMARY KEY,
+    skills_id INT NOT NULL,
+    programming_id INT NOT NULL,
+    education_id INT NOT NULL,
+    experience_id INT NOT NULL,
+
+    FOREIGN KEY (skills_id) REFERENCES skills(skills_id),
+    FOREIGN KEY (programming_id) REFERENCES programming(programming_id),
+    FOREIGN KEY (education_id) REFERENCES education(education_id),
+    FOREIGN KEY (experience_id) REFERENCES experience(experience_id)
+
+);

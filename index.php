@@ -63,23 +63,8 @@ if ($_SESSION["loggedin"] == true) {
     <main>
         <section id="home" class="section active">
             <div class="container">
-                <div class="home-content">
-                    <div class="intro-text">
-                        <h1 class="greeting">Hello, I'm</h1>
-                        <h2 class="name typing-effect">Earl Kian</h2>
-                        <h3 class="profession gradient-text">Full Stack Web Developer</h3>
-                        <p class="tagline">Full Stack, Fully Committed — Learning & Building Every Day.</p>
-                        <div class="cta-buttons">
-                            <a href="#contact" class="btn primary-btn">Contact Me</a>
-                            <a href="#projects" class="btn secondary-btn">View Work</a>
-                        </div>
-                    </div>
-                    <div class="profile-image">
-                        <div class="image-container">
-                            <div class="blob-bg"></div>
-                            <img src="images/profile.jpg" alt="Profile Image">
-                        </div>
-                    </div>
+                <div class="home-content" id="homeContentId">
+                    
                 </div>
             </div>
         </section>
@@ -91,7 +76,7 @@ if ($_SESSION["loggedin"] == true) {
                 <div class="skills-container">
                     <div class="skill-category">
                         <h3>Technical Skills</h3>
-                        <p class="skills-description">These are the main technologies I use to build full stack projects. Although I haven’t worked with clients yet, I’ve created several personal projects that show my ability to handle both front-end and back-end development. I’m always learning, improving my skills, and working towards becoming a more experienced and reliable developer.</p>
+                        <p class="skills-description" id="skillsDescription"></p>
                         
                         <div class="skills-icons-grid">
                             <div class="skill-icon-item">
@@ -189,15 +174,15 @@ if ($_SESSION["loggedin"] == true) {
                     <!-- Stats Section -->
                     <div class="stats-container">
                         <div class="stat-item">
-                            <div class="stat-number counter">25</div>
+                            <div class="stat-number counter" id="projectCompletedId"></div>
                             <div class="stat-title">Projects Completed</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number counter">18</div>
+                            <div class="stat-number counter" id="clientsServedId"></div>
                             <div class="stat-title">Clients Served</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number counter">3</div>
+                            <div class="stat-number counter" id="yearsExperienceId"></div>
                             <div class="stat-title">Years Experience</div>
                         </div>
                     </div>

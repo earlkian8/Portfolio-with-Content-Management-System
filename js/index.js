@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    getHome();
+    getSkill();
+
     initCursor();
 
     initMobileMenu();
@@ -57,9 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             if(data.status === "success"){
-                // Hide modal and possibly redirect or refresh
                 document.getElementById("adminLoginModal").classList.remove("show");
-                window.location.reload(); // or redirect
+                window.location.reload();
             } else {
                 alert(data.message || "Login failed");
             }
@@ -69,6 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("An error occurred during login");
         });
     });
+
+    
 });
 
 function initCursor() {
@@ -275,7 +279,7 @@ function initCounters() {
         counters.forEach(counter => {
             const target = parseInt(counter.textContent, 10);
             let count = 0;
-            const speed = 250 / target;
+            const speed = 100 / target;
             
             function updateCount() {
                 const increment = target / 100;
@@ -294,3 +298,58 @@ function initCounters() {
     }
 }
 
+function getHome(){
+    fetch("api/admin_home_api.php")
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === "success"){
+            const home = data.homeData[0];
+
+            document.getElementById("homeContentId").innerHTML += `
+                <div class="intro-text">
+                    <h1 class="greeting">Hello, I'm</h1>
+                    <h2 class="name typing-effect">${home.name}</h2>
+                    <h3 class="profession gradient-text">${home.designation}</h3>
+                    <p class="tagline">${home.tagline}</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn primary-btn">Contact Me</a>
+                        <a href="#projects" class="btn secondary-btn">View Work</a>
+                    </div>
+                </div>
+                <div class="profile-image">
+                    <div class="image-container" id="imageContainer">
+                        <div class="blob-bg"></div>
+                        <img src="Uploads/${home.profile_image}" alt="Profile Image">
+                    </div>
+                </div>
+            `;
+
+            initAnimations();
+
+            const homeElements = document.querySelectorAll('#home .intro-text > *, #home .profile-image');
+            homeElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.animation = `fadeInUp 0.8s ease-out forwards ${index * 0.3}s`;
+            });
+        }
+    })
+    .catch(error => console.error(error));
+}
+
+function getSkill(){
+    fetch("api/admin_skills_api.php", {
+        method: "GET",
+        headers: {"Content-Type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === "success"){
+            const skillData = data.skills;
+            document.getElementById("skillsDescription").textContent = skillData.description;
+            document.getElementById("projectCompletedId").textContent = skillData.project_completed;
+            document.getElementById("clientsServedId").textContent = skillData.clients_served;
+            document.getElementById("yearsExperienceId").textContent = skillData.years_experience;
+        }
+    })
+    .catch(error => console.error(error));
+}
