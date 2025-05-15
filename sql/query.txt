@@ -53,3 +53,19 @@ CREATE TABLE skill_details (
     FOREIGN KEY (experience_id) REFERENCES experience(experience_id)
 
 );
+
+CREATE TABLE projects (
+    project_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    technologies_used VARCHAR(255) NOT NULL,
+    url VARCHAR(255),
+    github VARCHAR(255)
+);
+
+CREATE TABLE services (
+    service_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL
+);

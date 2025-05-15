@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             if(data.status === "success"){
-                document.getElementById("adminLoginModal").classList.remove("show");
-                window.location.reload();
+                
+                window.location.href ='admin/home.php';
             } else {
                 alert(data.message || "Login failed");
             }

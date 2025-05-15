@@ -24,9 +24,8 @@ if (!isset($_SESSION['loggedin'])) {
                 <ul>
                     <li><a href="home.php"><i class="fas fa-home"></i> Home</a></li>
                     <li class="active"><a href="skills.php"><i class="fas fa-code"></i> Skills</a></li>
-                    <li><a href="admin/projects.php"><i class="fas fa-project-diagram"></i> Projects</a></li>
-                    <li><a href="admin/services.php"><i class="fas fa-concierge-bell"></i> Services</a></li>
-                    <li><a href="admin/contact.php"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="projects.php"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                    <li><a href="services.php"><i class="fas fa-concierge-bell"></i> Services</a></li>
                 </ul>
             </nav>
             <div class="logout">
