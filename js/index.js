@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     sendContactForm();
+
     
 });
 
@@ -318,8 +319,7 @@ function getHome(){
                     <h3 class="profession gradient-text">${home.designation}</h3>
                     <p class="tagline">${home.tagline}</p>
                     <div class="cta-buttons">
-                        <a href="#contact" class="btn primary-btn">Contact Me</a>
-                        <a href="#projects" class="btn secondary-btn">View Work</a>
+                        <button class="btn primary-btn" id="downloadCV">Download CV</button>
                     </div>
                 </div>
                 <div class="profile-image">
@@ -331,6 +331,19 @@ function getHome(){
             `;
 
             initAnimations();
+
+            document.getElementById("downloadCV").addEventListener("click", function(event) {
+                event.preventDefault();
+                
+                const cvFilePath = "Uploads/CV.pdf";
+
+                const link = document.createElement('a');
+                link.href = cvFilePath;
+                link.download = cvFilePath.split('/').pop();
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
 
             const homeElements = document.querySelectorAll('#home .intro-text > *, #home .profile-image');
             homeElements.forEach((element, index) => {
