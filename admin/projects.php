@@ -156,16 +156,7 @@ if (!isset($_SESSION['loggedin'])) {
                         <img id="currentProjectImage" src="" alt="Current Project Image">
                     </div>
                     <input type="file" id="editProjectImage" accept="image/*">
-                    <p class="help-text">Leave empty to keep current image</p>
-                </div>
-                <div class="form-group">
-                    <label for="editProjectCategory">Category</label>
-                    <select id="editProjectCategory" required>
-                        <option value="">Select Category</option>
-                        <option value="1">Web Development</option>
-                        <option value="2">Mobile Development</option>
-                        <option value="3">UI/UX Design</option>
-                    </select>
+                    <!-- <p class="help-text">Leave empty to keep current image</p> -->
                 </div>
                 <div class="form-group">
                     <label>Technologies Used</label>
@@ -184,14 +175,6 @@ if (!isset($_SESSION['loggedin'])) {
                 <div class="form-group">
                     <label for="editGithubLink">GitHub URL (optional)</label>
                     <input type="url" id="editGithubLink" placeholder="e.g. https://github.com/username/project" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="editProjectFeatured">Featured Project</label>
-                    <div class="toggle-switch">
-                        <input type="checkbox" id="editProjectFeatured">
-                        <span class="slider"></span>
-                    </div>
-                    <p class="help-text">Featured projects appear on your homepage</p>
                 </div>
             </div>
             <div class="modal-footer">
