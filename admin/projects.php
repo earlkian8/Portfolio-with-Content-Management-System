@@ -134,7 +134,7 @@ if (!isset($_SESSION['loggedin'])) {
     </form>
 
     <!-- Edit Project Modal -->
-    <form method="PUT" id="editProjectModal" class="modal">
+    <form method="PUT" id="editProjectModal" class="modal" enctype="multipart/form-data">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Edit Project</h3>

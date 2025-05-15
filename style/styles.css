@@ -506,6 +506,7 @@ nav ul li a.active::after {
 
 .project-links {
     display: flex;
+    z-index: 999;
 }
 
 .project-link {

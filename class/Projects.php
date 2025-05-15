@@ -21,7 +21,7 @@
         }
 
         public function updateProject($id, $title, $description, $image, $technologiesUsed, $url, $github){
-            $query = "UPDATE " . $this->table . " SET title = :title, description = :description, image = :image, technnologies_used = :technologiesUsed, url = :url, github = :github WHERE project_id = :id";
+            $query = "UPDATE " . $this->table . " SET title = :title, description = :description, image = :image, technologies_used = :technologiesUsed, url = :url, github = :github WHERE project_id = :id";
             $stmt = $this->conn->prepare($query);
             $stmt->execute([":id" => $id, ":title" => $title, ":description" => $description, ":image" => $image, ":technologiesUsed" => $technologiesUsed, ":url" => $url, ":github" => $github]);
         }

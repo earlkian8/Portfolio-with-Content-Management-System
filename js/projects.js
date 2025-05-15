@@ -125,17 +125,17 @@ function updateProject(id){
     formData.append("projectId", Number(id));
     formData.append("title", document.getElementById("editProjectTitle").value);
     formData.append("description", document.getElementById("editProjectDescription").value);
-    formData.append("technologiesUsed", document.getElementById("technologies_used").value);
+    formData.append("technologiesUsed", document.getElementById("editTechInput").value);
     formData.append("url", document.getElementById("editProjectLink").value);
     formData.append("github", document.getElementById("editProjectImage").value);
     
-    const image = document.getElementById("projectImage");
+    const image = document.getElementById("editProjectImage");
     if (image.files[0]) {
         formData.append("image", image.files[0]);
     }
 
-    fetch("../api/project_api.php", {
-        method: "PUT",
+    fetch("../api/update_project_api.php", {
+        method: "POST",
         body: formData
     })
     .then(response => response.json())

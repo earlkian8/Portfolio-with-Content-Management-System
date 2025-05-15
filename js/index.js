@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     getHome();
     getSkill();
+    getProgramming();
+    getEducation();
+    getExperience();
+    getProjects();
+    getServices();
 
     initCursor();
 
@@ -72,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    sendContactForm();
     
 });
 
@@ -352,4 +358,175 @@ function getSkill(){
         }
     })
     .catch(error => console.error(error));
+}
+
+
+function getProgramming(){
+    fetch("api/admin_programming_api.php")
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === "success"){
+            document.getElementById("skillsIconsGrid").innerHTML = "";
+            data.programmings.forEach(p => {
+                document.getElementById("skillsIconsGrid").innerHTML += `
+                    <div class="skill-icon-item">
+                    <div class="skill-logo">
+                        <i class="${p.icon_class}"></i>
+                    </div>
+                    <span>${p.name}</span>
+                `;
+            });
+        }
+    })
+    .catch(error => console.error(error));
+}
+
+function getEducation(){
+    fetch("api/admin_education_api.php")
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === "success"){
+            document.getElementById("timelineId").innerHTML = "";
+            data.educations.forEach(e => {
+                document.getElementById("timelineId").innerHTML += `
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>${e.degree}</h4>
+                            <p class="timeline-location">${e.institution}</p>
+                            <p class="timeline-date">${e.start_year} - ${e.end_year}</p>
+                            <p>${e.description}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    })
+    .catch(error => console.error(error));
+}
+
+function getExperience(){
+    fetch("api/admin_experience_api.php")
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === "success"){
+            document.getElementById("experienceTimeline").innerHTML = "";
+            data.experiences.forEach(e => {
+                document.getElementById("experienceTimeline").innerHTML += `
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>${e.position}</h4>
+                            <p class="timeline-location">${e.company}</p>
+                            <p class="timeline-date">${e.start_year} - ${e.end_year}</p>
+                            <p>${e.description}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    })
+    .catch(error => console.error(error));
+}
+
+function getProjects(){
+    fetch("api/project_api.php")
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === "success"){
+            document.getElementById("projectGridId").innerHTML = "";
+
+            data.projects.forEach(p => {
+                const technologies = p.technologies_used ? p.technologies_used.split(',').map(tech => tech.trim()) : [];
+                const techSpans = technologies.map(tech => `<span>${tech}</span>`).join('');
+                document.getElementById("projectGridId").innerHTML += `
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="Uploads/${p.image}" alt="Project 1">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="${p.url ? p.url : "#"}" class="project-link" style="cursor:pointer;" target="_blank"><i class="fas fa-eye"></i></a>
+                                    <a href="${p.github ? p.github : "#"}" class="project-link" style="cursor:pointer;" target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3>${p.title}</h3>
+                            <p>${p.description}</p>
+                            <div class="project-tags">
+                                ${techSpans}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    })
+    .catch(error => console.error(error));
+}
+
+function getServices(){
+    fetch("api/service_api.php")
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === "success"){
+            document.getElementById("serviceGrids").innerHTML = "";
+            data.services.forEach(s => {
+                document.getElementById("serviceGrids").innerHTML += `
+                    <div class="service-card">
+                        <h3>${s.name}</h3>
+                        <p>${s.description}</p>
+                    </div>
+                `;
+            });
+        }
+    })
+    .catch(error => console.error(error));
+}
+
+function sendContactForm() {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4.3.3/dist/email.min.js';
+    script.onload = () => {
+
+        emailjs.init("_dv1Ca56HP3cHp12J");
+
+        const form = document.getElementById('contactForm');
+        let status = document.getElementById('status');
+
+        if (!form) {
+            console.error('Contact form not found');
+            return;
+        }
+
+        if (!status) {
+            status = document.createElement('div');
+            status.id = 'status';
+            form.parentNode.appendChild(status);
+        }
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            status.textContent = 'Sending...';
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value || 'No Subject',
+                message: document.getElementById('message').value
+            };
+
+            emailjs.send('service_kl1s5bs', 'template_7me52b6', formData)
+                .then(() => {
+                    status.textContent = 'Message sent successfully!';
+                    status.classList.remove('error');
+                    form.reset();
+                }, (error) => {
+                    status.textContent = 'Failed to send message: ' + error.text;
+                    status.classList.add('error');
+                });
+        });
+    };
+    document.head.appendChild(script);
 }

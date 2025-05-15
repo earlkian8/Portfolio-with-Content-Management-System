@@ -69,8 +69,8 @@
                         <h3>Technical Skills</h3>
                         <p class="skills-description" id="skillsDescription"></p>
                         
-                        <div class="skills-icons-grid">
-                            <div class="skill-icon-item">
+                        <div class="skills-icons-grid" id="skillsIconsGrid">
+                            <!-- <div class="skill-icon-item">
                                 <div class="skill-logo">
                                     <i class="fab fa-html5"></i>
                                 </div>
@@ -117,15 +117,15 @@
                                     <i class="fas fa-code"></i>
                                 </div>
                                 <span>C++</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     
                     <!-- Education Section -->
                     <div class="skill-category">
                         <h3>Education</h3>
-                        <div class="timeline">
-                            <div class="timeline-item">
+                        <div class="timeline" id="timelineId">
+                            <!-- <div class="timeline-item">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-content">
                                     <h4>Bachelor of Science in Information Technology</h4>
@@ -142,15 +142,15 @@
                                     <p class="timeline-date">2021-2023</p>
                                     <p>Completed Senior High School under the TVL-ICT strand, specializing in Technical Drafting.</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     
                     <!-- Experience Section -->
                     <div class="skill-category">
                         <h3>Experience</h3>
-                        <div class="timeline">
-                            <div class="timeline-item">
+                        <div class="timeline" id="experienceTimeline">
+                            <!-- <div class="timeline-item">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-content">
                                     <h4>Network Intern</h4>
@@ -158,7 +158,7 @@
                                     <p class="timeline-date">2023</p>
                                     <p>Assisted in setting up, maintaining, and troubleshooting network systems. Gained hands-on experience with routers, switches, and basic IT infrastructure.</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     
@@ -184,13 +184,13 @@
         <section id="projects" class="section">
             <div class="container">
                 <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
-                <div class="projects-grid">
-                    <div class="project-card">
+                <div class="projects-grid" id="projectGridId">
+                    <!-- <div class="project-card">
                         <div class="project-image">
                             <img src="images/payroll.png" alt="Project 1">
                             <div class="project-overlay">
                                 <div class="project-links">
-                                    <a href="#" class="project-link"><i class="fas fa-eye"></i></a>
+                                    <a href="#" class="project-link" ><i class="fas fa-eye"></i></a>
                                     <a href="#" class="project-link"><i class="fab fa-github"></i></a>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
                                 <span>JavaScript</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                 </div>
             </div>
@@ -232,8 +232,8 @@
         <section id="services" class="section">
             <div class="container">
                 <h2 class="section-title">My <span class="gradient-text">Services</span></h2>
-                <div class="services-grid">
-                    <div class="service-card">
+                <div class="services-grid" id="serviceGrids">
+                    <!-- <div class="service-card">
                         <h3>Web Development</h3>
                         <p>I create responsive and well-structured websites that perform smoothly across all devices. By combining modern technologies with tailored design, I deliver web solutions that help you stand out and support your goals.</p>
                     </div>
@@ -246,7 +246,7 @@
                     <div class="service-card">
                         <h3>UI/UX Design</h3>
                         <p>I design thoughtful and intuitive user experiences that enhance how people interact with your product. With a strong focus on both usability and visual appeal, I help turn ideas into meaningful digital experiences.</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -287,8 +287,8 @@
                         </div>
                         
                         <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/earlkian8" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/earl-kian-bancayrin-213858354/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     
